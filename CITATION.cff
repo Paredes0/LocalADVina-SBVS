@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: "If you use this pipeline in your research, please cite it and the underlying scientific tools (AutoDock Vina, Smina, Meeko, RDKit, Open Babel) listed in the README."
+title: "Local SBVS Pipeline"
+abstract: >-
+  A hybrid Structure-Based Virtual Screening (SBVS) workflow that uses Google
+  Colab as the user interface and a local machine for heavy computation,
+  enabling efficient, resumable, parallelized molecular docking with
+  AutoDock Vina and Smina.
+type: software
+authors:
+  - family-names: "Paredes Alfonso"
+    given-names: "Noé"
+    affiliation: "BIO-HPC, Universidad Católica de Murcia (UCAM)"
+keywords:
+  - virtual-screening
+  - molecular-docking
+  - bioinformatics
+  - autodock-vina
+  - smina
+  - structure-based-drug-design
+  - cheminformatics
+license: MIT
+repository-code: "https://github.com/Paredes0/LocalADVina-SBVS"
