@@ -57,8 +57,9 @@ chmod +x bin/micromamba
 Create a virtual environment with all the necessary bioinformatics tools.
 
 > **Important:** the notebook cells run their commands inside an environment
-> named **`docking_vina`**. Use exactly this name, or the cells will not find
-> your tools.
+> named **`docking_vina`** by default. If you use this name, everything works
+> out of the box; if you prefer a different name, set it once in each cell's
+> **`MAMBA_ENV_NAME`** field.
 
 #### Option A — One command (recommended)
 
@@ -167,7 +168,7 @@ Once you have connected your local environment, the process inside the Google Co
 1. **Cell 1: Path Configuration**: The first step is to edit the variables containing the paths to your files (receptor, ligands, executables, and result folders). Make sure to use the WSL path format (`/mnt/c/...`).
 2. **Cell 2: Molecule Preparation**: Run this cell to convert your receptor and ligands to `PDBQT` format.
 3. **Cell 3: Test Docking**: Performs a docking with a single ligand to ensure the `bounding box` and configuration are correct.
-4. **Cell 4: Massive Virtual Screening (SBVS)**: This cell will start the heavy calculation on your local computer. Remember that this process can take hours depending on the number of ligands and parameters used (exhaustiveness and conformations).
+4. **Cell 4: Massive Virtual Screening (SBVS)**: This cell will start the heavy calculation on your local computer. Remember that this process can take hours depending on the number of ligands and parameters used (exhaustiveness and conformations). The run is **resumable**: ligands that already finished successfully are skipped, and any that fail are written to a separate `*_error.txt` file (and listed in `ligandos_fallidos.csv`) so they are automatically retried the next time you run the cell. You can also set the **affinity threshold** used to flag the best candidates.
 5. **Cell 5: Analysis and Refinement**: Once the screening is finished, this section allows you to analyze the results, select the best candidates, and perform a higher-precision docking with AutoDock Vina.
 
 ## ⚠️ WARNING: How to Stop a Local Execution
