@@ -1,0 +1,28 @@
+# Reproducible environment for the Local SBVS Pipeline.
+#
+# Create it with:
+#     micromamba create -f environment.yml
+#     micromamba activate docking_vina
+#
+# This single environment contains every tool the notebook cells invoke
+# (mk_prepare_ligand.py, mk_prepare_receptor.py, vina, smina, obabel) plus
+# the Python libraries the generated scripts import (rdkit, pandas, tqdm).
+name: docking_vina
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - python>=3.10
+  - numpy
+  - pandas
+  - swig
+  - boost-cpp
+  - libboost
+  - tqdm
+  - rdkit
+  - meeko
+  - openbabel
+  - smina
+  - pip
+  - pip:
+      - vina

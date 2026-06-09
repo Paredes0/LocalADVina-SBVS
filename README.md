@@ -56,26 +56,50 @@ chmod +x bin/micromamba
 
 Create a virtual environment with all the necessary bioinformatics tools.
 
+> **Important:** the notebook cells run their commands inside an environment
+> named **`docking_vina`**. Use exactly this name, or the cells will not find
+> your tools.
+
+#### Option A — One command (recommended)
+
+A pinned [`environment.yml`](environment.yml) is provided so you can build the
+whole toolchain in a single step:
+
 ```bash
-# Create the environment
-micromamba create -n docking_env
+# Create the environment from the file (it is named docking_vina)
+micromamba create -f environment.yml
 
 # Activate the environment
-micromamba activate docking_env
+micromamba activate docking_vina
+```
 
-# Install packages from conda-forge channel and pip
-micromamba install -c conda-forge numpy swig boost-cpp libboost tqdm rdkit meeko openbabel
+#### Option B — Manual installation
+
+```bash
+# Create the environment
+micromamba create -n docking_vina
+
+# Activate the environment
+micromamba activate docking_vina
+
+# Install packages from the conda-forge and bioconda channels, plus pip
+micromamba install -c conda-forge -c bioconda numpy pandas swig boost-cpp libboost tqdm rdkit meeko openbabel smina
 pip install vina
 
 ```
+
+> **Why these packages?** `rdkit`, `meeko` and `openbabel` prepare and convert
+> molecules; `vina` and `smina` run the docking; `pandas` and `tqdm` are
+> imported by the screening scripts the notebook generates. Installing them all
+> now avoids errors part-way through a long run.
 
 ### 4. Link Colab with the Local Environment
 
 To connect the Colab interface with the power of your machine, you need to start a Jupyter server.
 
 ```bash
-# If you are still in the docking_env environment, you must exit it
-micromamba deactivate docking_env
+# If you are still in the docking_vina environment, you must exit it
+micromamba deactivate docking_vina
 
 # Create the environment
 micromamba create -n colab_connect
@@ -99,7 +123,7 @@ Follow the instructions in the terminal to obtain the URL with the token and con
 
 The first thing you must do before anything else is download the `.ipynb` file and upload it to Google Colab via --> "File -> Upload notebook" and select the file.
 
-Once you have both environments installed (`docking_env` and `colab_connect`) with all packages installed, you will only have to perform the previous step without needing to install JupyterLab again; just activate the `colab_connect` environment, start the Jupyter server, and paste it into Google Colab to connect.
+Once you have both environments installed (`docking_vina` and `colab_connect`) with all packages installed, you will only have to perform the previous step without needing to install JupyterLab again; just activate the `colab_connect` environment, start the Jupyter server, and paste it into Google Colab to connect.
 
 ```bash
 # Activate the environment
@@ -110,7 +134,7 @@ jupyter lab --no-browser --NotebookApp.allow_origin='https://colab.research.goog
 
 ```
 
-The `docking_env` environment will work by executing orders sent from the Google Colab notebook to the JupyterLab server. You do not need to connect to it from the terminal; just leave the `colab_connect` environment active and the server started.
+The `docking_vina` environment will work by executing orders sent from the Google Colab notebook to the JupyterLab server. You do not need to connect to it from the terminal; just leave the `colab_connect` environment active and the server started.
 
 ### 6. File Organization and Paths
 
@@ -209,6 +233,20 @@ Performance tests show notable efficiency:
 | **JupyterLab** | Server for remote connection |
 | **Google Colab** | User interface and control |
 
+## 🤝 Contributing
+
+Contributions, bug reports, and ideas are welcome! Please read
+[`CONTRIBUTING.md`](CONTRIBUTING.md) for how to set up the environment and open
+issues or pull requests. There are issue templates for bug reports and feature
+requests to help you get started.
+
+## 📚 How to Cite
+
+If this pipeline is useful in your research, please cite it (see
+[`CITATION.cff`](CITATION.cff)) **and** the underlying scientific tools listed
+in the [Acknowledgements](#acknowledgements-licenses-and-responsibilities)
+section below.
+
 ## 📄 License
 
 Distributed under the MIT License. See the `LICENSE` file for more information.
@@ -218,7 +256,7 @@ Distributed under the MIT License. See the `LICENSE` file for more information.
 **Noé Paredes Alfonso**
 
 * **GitHub**: [Paredes0](https://github.com/Paredes0)
-* **LinkedIn**: [Your Profile](https://www.linkedin.com/in/no%C3%A9-paredes-alfonso-395328267/)
+* **LinkedIn**: [Noé Paredes Alfonso](https://www.linkedin.com/in/no%C3%A9-paredes-alfonso-395328267/)
 
 ## Acknowledgements, Licenses, and Responsibilities
 
